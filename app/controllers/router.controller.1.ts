@@ -29,7 +29,7 @@ router.get('/', async (req: Request, res: Response) => {
 
     console.log(id)
     //let id = await client.getAsync(req.cookies.sessionId.split('.')[0]);
-    res.send("   Hello" + 444 + id);
+    res.send("   Hello" + 333 + id);
 });
 
 // router.get('/:name', async (req: Request, res: Response) => {
@@ -41,7 +41,7 @@ router.get('/', async (req: Request, res: Response) => {
 //     }
 // });
 
-export const RouterController: Router = router;
+export const accountController: Router = router;
 
 class sendData {
     init() {
