@@ -8,7 +8,8 @@ export const redisConfig = {
 }
 
 export const mysqlConfig = {
-    host: '192.168.6.52',
+    host: '192.168.6.219',
+    port: 3306,
     user: 'admin',
     password: 'shaB9527-+',
     database: 'sys'
