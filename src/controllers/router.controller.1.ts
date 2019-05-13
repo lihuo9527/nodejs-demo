@@ -1,21 +1,16 @@
 import { Router, Request, Response } from 'express';
-import * as mysql from 'mysql';
 import { User } from '../../db-config';
-import { redisConfig, mysqlConfig } from '../../environments/environments';
 import { MysqlOnce } from '../share/methods';
-const redis = require('redis');
-const bluebird = require('bluebird');
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);
-let client = redis.createClient(redisConfig.port, redisConfig.host);
-client.on('ready', () => { console.log('connected'); });
+import redisClient from './db/redis';
+import pool from './db/mysql';
+redisClient.on('ready', () => { console.log('connected'); });
 const router: Router = Router();
-let pool = mysql.createPool(mysqlConfig);
+
 router.get('/', async (req: Request, res: Response) => {
     console.log(req.cookies.sessionId);
     let id = ''
     if (req.cookies.sessionId) {
-        id = await client.getAsync(req.cookies.sessionId.split('.')[0]);
+        id = await redisClient.getAsync(req.cookies.sessionId.split('.')[0]);
     }
     let sql = `SELECT * FROM sys_config WHERE ?`;
     let obj: any = null;
