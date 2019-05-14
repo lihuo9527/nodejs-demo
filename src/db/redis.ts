@@ -1,4 +1,4 @@
-import { redisConfig } from '../../../environments/environments';
+import { redisConfig } from '../../environments/environments';
 const bluebird = require('bluebird');
 const redis = require('redis');
 bluebird.promisifyAll(redis.RedisClient.prototype);
